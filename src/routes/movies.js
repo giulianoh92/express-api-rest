@@ -4,10 +4,6 @@ import { MovieController } from '../controllers/movies.js';
 
 const movieRouter = Router();
 
-movieRouter.get('/', (req, res) => {
-    res.send('Hello World!');
-});
-
 movieRouter.get('/movies', MovieController.getAll);
 
 movieRouter.get('/movies/:id', MovieController.getById);
