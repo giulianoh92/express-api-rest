@@ -1,6 +1,6 @@
-import cors from 'cors'; // Import the CORS package
+import cors from 'cors'; // importar el paquete cors
 
-const ACCEPTED_ORIGINS = [ // Allowed origins
+const ACCEPTED_ORIGINS = [ // origenes permitidos
     'http://localhost:3000', 
     'http://localhost:8080', 
     'https://my-app.com'

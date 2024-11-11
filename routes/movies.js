@@ -9,26 +9,26 @@ const movieRouter = Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const moviePath = path.join(__dirname, '../movies.json');
-const movies = JSON.parse(readFileSync(moviePath, 'utf-8')); // Load movies from JSON file
+const movies = JSON.parse(readFileSync(moviePath, 'utf-8')); // cargar las películas desde el archivo JSON
 
 movieRouter.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
 movieRouter.get('/movies', (req, res) => {
-    const { genre } = req.query; // Get the genre from request query parameters
+    const { genre } = req.query; // obtener el género de la consulta
     if (genre) {
         const filteredMovies = movies.filter(
-            movie => movie.genre.toLowerCase() === genre.toLowerCase() // Filter movies by genre if provided
+            movie => movie.genre.toLowerCase() === genre.toLowerCase() // filtrar las películas por género
         );
         return res.json(filteredMovies);
     }
-    res.json(movies); // Return all movies if no genre is specified
+    res.json(movies); // retorna todas las películas si no se proporciona un género
 });
 
 movieRouter.get('/movies/:id', (req, res) => {
     const id = req.params.id;
-    const movie = movies.find(movie => movie.id === id); // Find movie by ID
+    const movie = movies.find(movie => movie.id === id); // buscar la película por ID
 
     if (!movie) {
         return res.status(404).json({ message: 'Movie not found' });
@@ -37,8 +37,8 @@ movieRouter.get('/movies/:id', (req, res) => {
     res.json(movie);
 });
 
-movieRouter.post('/movies', (req, res) => { // Route to create a new movie, supporting single or multiple movie creation
-    const moviesArray = Array.isArray(req.body) ? req.body : [req.body]; // Handle both single object and array in request body
+movieRouter.post('/movies', (req, res) => { // ruta para crear una nueva película, o varias películas
+    const moviesArray = Array.isArray(req.body) ? req.body : [req.body]; // manejar una solicitud de una sola película o varias películas
     const newMovies = [];
 
     for (const movieData of moviesArray) {
@@ -48,7 +48,7 @@ movieRouter.post('/movies', (req, res) => { // Route to create a new movie, supp
             return res.status(422).json({ message: result.error.message });
         }
 
-        const newMovie = { // Create a new movie object
+        const newMovie = { // crear una nueva película con un ID único
             id: randomUUID(),
             ...movieData
         };
@@ -64,21 +64,20 @@ movieRouter.post('/movies', (req, res) => { // Route to create a new movie, supp
 
 movieRouter.patch('/movies/:id', (req, res) => {
     const { id } = req.params;
-    const movie = movies.find(movie => movie.id === id); // Find movie by ID
+    const movie = movies.find(movie => movie.id === id); // buscar la película por ID
 
     if (!movie) {
         return res.status(404).json({ message: 'Movie not found' });
     }
 
-    const result = validatePartialMovie(req.body); // Partially validate movie data
+    const result = validatePartialMovie(req.body); // validar parcialmente los datos de la película
 
     if (result.error) {
         return res.status(422).json({ message: result.error.message });
     }
 
-    Object.assign(movie, req.body); // Update movie with new data
-
-    writeFileSync(moviePath, JSON.stringify(movies, null, 2)); // Save updated movies list
+    Object.assign(movie, req.body); // actualizar la película con los datos nuevos
+    writeFileSync(moviePath, JSON.stringify(movies, null, 2)); // guardar los cambios en el archivo JSON
 
     res.json(movie);
 });
