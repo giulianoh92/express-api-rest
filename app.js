@@ -1,15 +1,16 @@
-const express = require('express');
-const fs = require('node:fs');
-const cors = require('cors');
-const crypto = require('node:crypto');
-const movies = require('./movies.json');
-const { validateMovie, validatePartialMovie } = require('./schemas/movies');
+import express, { json } from 'express';
+import { writeFileSync, readFileSync } from 'node:fs';
+import cors from 'cors';
+import { randomUUID } from 'node:crypto';
+import { validateMovie, validatePartialMovie } from './schemas/movies.js';
+
+const movies = JSON.parse(readFileSync('./movies.json', 'utf-8'));
 
 const app = express();
 app.disable('x-powered-by'); // Deshabilita la cabecera X-Powered-By
 const port = process.env.PORT ?? 3000;
 
-app.use(express.json());
+app.use(json());
 app.use(cors({
     origin: (origin, callback) => {
         const ACCEPTED_ORIGINS = [
@@ -26,13 +27,13 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-    res.json({ message: 'Hello World' });
+    res.send('Hello World!');
 });
 
 app.get('/movies', (req, res) => {
     const { genre } = req.query;
     if (genre) {
-        const filteredMovies = movies.filter(
+        const filteredMovies = filter(
             movie => movie.genre.toLowerCase() === genre.toLowerCase()
         );
         return res.json(filteredMovies);
@@ -42,7 +43,7 @@ app.get('/movies', (req, res) => {
 
 app.get('/movies/:id', (req, res) => {
     const id = parseInt(req.params.id);
-    const movie = movies.find(movie => movie.id === id);
+    const movie = find(movie => movie.id === id);
 
     if (!movie) {
         return res.status(404).json({ message: 'Movie not found' });
@@ -63,22 +64,22 @@ app.post('/movies', (req, res) => {
         }
 
         const newMovie = {
-            id: crypto.randomUUID(),
+            id: randomUUID(),
             ...movieData
         };
 
-        movies.push(newMovie);
+        push(newMovie);
         newMovies.push(newMovie);
     }
 
-    fs.writeFileSync('./movies.json', JSON.stringify(movies, null, 2));
+    writeFileSync('./movies.json', JSON.stringify(movies, null, 2));
 
     res.status(201).json(newMovies);
 });
 
 app.patch('/movies/:id', (req, res) => {
     const { id } = req.params;
-    const movie = movies.find(movie => movie.id === id);
+    const movie = find(movie => movie.id === id);
 
     if (!movie) {
         return res.status(404).json({ message: 'Movie not found' });
@@ -92,7 +93,7 @@ app.patch('/movies/:id', (req, res) => {
 
     Object.assign(movie, req.body);
 
-    fs.writeFileSync('./movies.json', JSON.stringify(movies, null, 2));
+    writeFileSync('./movies.json', JSON.stringify(movies, null, 2));
 
     res.json(movie);
 });
