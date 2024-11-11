@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { writeFileSync, readFileSync } from 'node:fs';
+import { path } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { validateMovie, validatePartialMovie } from '../schemas/movies.js';
 
 const movieRouter = Router();
-const movies = JSON.parse(readFileSync('./movies.json', 'utf-8')); // Load movies from JSON file
+const moviePath = path.join(__dirname, '../movies.json');
+const movies = JSON.parse(readFileSync(moviePath, 'utf-8')); // Load movies from JSON file
 
 movieRouter.get('/', (req, res) => {
     res.send('Hello World!');
