@@ -1,0 +1,29 @@
+[
+  {
+    "id": "79034390-be40-4b3f-9090-c84b86dece30",
+    "title": "Toy Story",
+    "director": "John Lasseter",
+    "year": 2015,
+    "genre": "Animation",
+    "rating": 8.5,
+    "duration": 81
+  },
+  {
+    "id": "2292c5d0-0002-4953-9e7c-4d7a4dd48f0f",
+    "title": "The Lion King",
+    "director": "Roger Allers",
+    "year": 1994,
+    "genre": "Animation",
+    "rating": 8.5,
+    "duration": 88
+  },
+  {
+    "id": "ae2e1db9-c1ff-4083-b216-86e6bca3ad27",
+    "title": "John Wick",
+    "director": "Chad Stahelski",
+    "year": 2014,
+    "genre": "Action",
+    "rating": 7.4,
+    "duration": 101
+  }
+]

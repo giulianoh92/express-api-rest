@@ -1,0 +1,61 @@
+// Obtener todas las peliculas
+GET http://localhost:3000/movies
+
+// Filtrar por id
+GET http://localhost:3000/movies/1
+
+// Filtrar por genero
+GET http://localhost:3000/movies?genre=action
+
+
+// Post de varias peliculas
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+[
+    {
+        "title": "Toy Story",
+        "director": "John Lasseter",
+        "year": 1995,
+        "genre": "Animation",
+        "rating": 8.3,
+        "duration": 81
+    },
+    {
+        "title": "The Lion King",
+        "director": "Roger Allers",
+        "year": 1994,
+        "genre": "Animation",
+        "rating": 8.5,
+        "duration": 88
+    }
+]
+
+// Post de una sola pelicula
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "John Wick",
+    "director": "Chad Stahelski",
+    "year": 2014,
+    "genre": "Action",
+    "rating": 7.4,
+    "duration": 101
+}
+
+// Patch de una pelicula
+PATCH http://localhost:3000/movies/79034390-be40-4b3f-9090-c84b86dece30
+Content-Type: application/json
+
+{
+    "rating": 8.5
+}
+
+// Patch con error
+PATCH http://localhost:3000/movies/79034390-be40-4b3f-9090-c84b86dece30
+Content-Type: application/json
+
+{
+    "year": "2015"
+}

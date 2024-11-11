@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Rest Películas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        article {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        h2 {
+            margin: 0;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+    <script type="module">
+        fetch('http://localhost:3000/movies')
+            .then(res => res.json())
+            .then(movies => {
+                const html = movies.map(movie => `
+                    <article data-id="${movie.id}">
+                        <h2>${movie.title}</h2>
+                        <p>Director: ${movie.director}</p>
+                        <p>Year: ${movie.year}</p>
+                        <p>Rating: ${movie.rating}</p>
+                    </article>
+                `).join('');
+
+                document.querySelector('main').innerHTML = html;
+            });
+    </script>
+</head>
+<body>
+    <main>
+
+    </main>
+</body>
+</html>
