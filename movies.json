@@ -1,14 +1,5 @@
 [
   {
-    "id": "c83c8be5-f3d9-4fb6-884d-7249c452d920",
-    "title": "John Wick",
-    "director": "Chad Stahelski",
-    "year": 2014,
-    "genre": "Action",
-    "rating": 8.5,
-    "duration": 101
-  },
-  {
     "id": "c9e43e4e-759a-40b4-af4a-f0e7b70bedef",
     "title": "Toy Story",
     "director": "John Lasseter",
