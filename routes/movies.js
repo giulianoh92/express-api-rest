@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import { writeFileSync, readFileSync } from 'node:fs';
-import { path } from 'node:path';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { validateMovie, validatePartialMovie } from '../schemas/movies.js';
 
 const movieRouter = Router();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const moviePath = path.join(__dirname, '../movies.json');
 const movies = JSON.parse(readFileSync(moviePath, 'utf-8')); // Load movies from JSON file
 
@@ -54,7 +57,7 @@ movieRouter.post('/movies', (req, res) => { // Route to create a new movie, supp
         newMovies.push(newMovie);
     }
 
-    writeFileSync('./movies.json', JSON.stringify(movies, null, 2));
+    writeFileSync(moviePath, JSON.stringify(movies, null, 2));
 
     res.status(201).json(newMovies);
 });
@@ -75,7 +78,7 @@ movieRouter.patch('/movies/:id', (req, res) => {
 
     Object.assign(movie, req.body); // Update movie with new data
 
-    writeFileSync('./movies.json', JSON.stringify(movies, null, 2)); // Save updated movies list
+    writeFileSync(moviePath, JSON.stringify(movies, null, 2)); // Save updated movies list
 
     res.json(movie);
 });
