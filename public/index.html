@@ -17,20 +17,24 @@
                     </article>
                 `).join('');
 
-                document.querySelector('main').innerHTML = html;
+                document.querySelector('#movies').innerHTML = html;
             });
     </script>
 </head>
 <body>
     <main>
-        <h1>API Rest Películas</h1>
-        <p>GET /api/movies</p>
-        <p>GET /api/movies/:id</p>
-        <p>GET /api/movies?genre={genre}</p>
-        <p>POST /api/movies</p>
-        <p>PATCH /api/movies/:id</p>
-
-        <p> ------------------ </p>
+        <section id="documentation">
+            <h1>API Rest Películas</h1>
+            <p>GET /api/movies</p>
+            <p>GET /api/movies/:id</p>
+            <p>GET /api/movies?genre={genre}</p>
+            <p>POST /api/movies</p>
+            <p>PATCH /api/movies/:id</p>
+            <p> ------------------ </p>
+        </section>
+        <section id="movies">
+            <!-- Aquí se insertarán las películas -->
+        </section>
     </main>
 </body>
 </html>
