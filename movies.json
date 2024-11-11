@@ -5,7 +5,25 @@
     "director": "Chad Stahelski",
     "year": 2014,
     "genre": "Action",
-    "rating": 7.4,
+    "rating": 8.5,
     "duration": 101
+  },
+  {
+    "id": "c9e43e4e-759a-40b4-af4a-f0e7b70bedef",
+    "title": "Toy Story",
+    "director": "John Lasseter",
+    "year": 1995,
+    "genre": "Animation",
+    "rating": 8.3,
+    "duration": 81
+  },
+  {
+    "id": "2fe417d7-0249-4f76-a95a-5a16f040ff25",
+    "title": "The Lion King",
+    "director": "Roger Allers",
+    "year": 1994,
+    "genre": "Animation",
+    "rating": 8.5,
+    "duration": 88
   }
 ]

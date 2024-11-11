@@ -1,23 +1,16 @@
-import cors from 'cors'; // Importa el paquete CORS
+import cors from 'cors'; // Import the CORS package
 
-
-
-const ACCEPTED_ORIGINS = [ // Orígenes permitidos
+const ACCEPTED_ORIGINS = [ // Allowed origins
     'http://localhost:3000', 
     'http://localhost:8080', 
     'https://my-app.com'
 ];
 
-export const corsMiddleware = ({acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({
+export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) => cors({
     origin: (origin, callback) => {
-        if (ACCEPTED_ORIGINS.includes(origin)) {
+        if (acceptedOrigins.includes(origin) || !origin) {
             return callback(null, true);
         }
-
-        if (!origin) {
-            return callback(null, true);
-        }
-
-        return callback(new Error('Not allowed by CORS'));
+        return callback(new Error('Origin not allowed by CORS'));
     }
-}); // Middleware de CORS
+}); // CORS Middleware

@@ -1,7 +1,6 @@
 import express, { json } from 'express';
-import cors from 'cors';
-import { movieRouter } from './routes/movies.js'; // Importa el enrutador de películas
-import { corsMiddleware } from './middlewares/cors.js';
+import { movieRouter } from '../routes/movies.js'; // Importa el enrutador de películas
+import { corsMiddleware } from '../middlewares/cors.js';
 
 const app = express(); // Instancia de Express
 const port = process.env.PORT ?? 3000; // Puerto del servidor, por variable de entorno o 3000
