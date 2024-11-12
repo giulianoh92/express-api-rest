@@ -18,6 +18,27 @@ export class MovieController {
         res.json(movie);
     }
 
+    static async getByTitle(req, res) {
+        const { title } = req.params;
+        const movie = await Movie.findOne({ where: { title } });
+        if (!movie) {
+            return res.status(404).json({ message: 'Movie not found' });
+        }
+        res.json(movie);
+    }
+
+    static async getByDirectorId(req, res) {
+        const { id } = req.params;
+        const movies = await Movie.findAll({ where: { directorId: id } });
+        res.json(movies);
+    }
+
+    static async getByDirector(req, res) {
+        const { name } = req.params;
+        const movies = await Movie.findAll({ where: { director: name } });
+        res.json(movies);
+    }
+
     static async create(req, res) {
         if (!req.body) {
             return res.status(400).json({ message: 'Request body is required' });

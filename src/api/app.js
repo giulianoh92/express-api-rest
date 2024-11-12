@@ -1,5 +1,6 @@
 import express, { json } from 'express';
-import { movieRouter } from '../routes/movies.js'; // Importa el enrutador de películas
+import { movieRouter } from '../routes/movies.js';
+import { directorRouter } from '../routes/directors.js';
 import { corsMiddleware } from '../middlewares/cors.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,7 +16,8 @@ app.use(json()); // Middleware para parsear el cuerpo de las solicitudes a JSON
 app.use(corsMiddleware()); // Middleware de CORS
 app.disable('x-powered-by'); // Deshabilita la cabecera X-Powered-By
 
-app.use('/api', movieRouter); // Monta el enrutador de películas en la ruta /api
+app.use('/api', movieRouter); // Middleware para manejar las rutas de películas
+app.use('/api', directorRouter); // Middleware para manejar las rutas de directores
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

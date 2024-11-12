@@ -39,7 +39,7 @@ Content-Type: application/json
 
 {
     "title": "John Wick",
-    "director": "Chad Stahelski",
+    "directorId": "3868d2b0-dcab-4fba-920a-a0dfd44e90c8",
     "year": 2014,
     "genre": "Action",
     "rating": 7.4,
@@ -64,3 +64,25 @@ Content-Type: application/json
 
 // Delete de una pelicula
 DELETE http://localhost:3000/api/movies/c83c8be5-f3d9-4fb6-884d-7249c452d920
+
+// Get de todos los directores
+GET http://localhost:3000/api/directors
+
+GET http://localhost:3000/api/directors/3868d2b0-dcab-4fba-920a-a0dfd44e90c8
+
+POST http://localhost:3000/api/directors
+Content-Type: application/json
+
+{
+    "name": "Chad Stahelski",
+    "birthDate" : "1968-09-20",
+    "email": "chadstahelski@gmail.com",
+    "phone": "555-555-555"
+}
+
+PATCH http://localhost:3000/api/directors/3868d2b0-dcab-4fba-920a-a0dfd44e90c8
+Content-Type: application/json
+
+{
+    "phone": "555-555-556"
+}

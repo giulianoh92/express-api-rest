@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../database/db.js';
+import { Director } from './director.js'; // Importa el modelo Director
 
 export const Movie = sequelize.define('Movie', {
     id: {
@@ -12,9 +13,13 @@ export const Movie = sequelize.define('Movie', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    director: {
-        type: DataTypes.STRING,
-        allowNull: false
+    directorId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: {
+            model: Director,
+            key: 'id'
+        }
     },
     year: {
         type: DataTypes.INTEGER,
